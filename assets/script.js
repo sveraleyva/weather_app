@@ -2,23 +2,47 @@
 let APIKey = "ee59ede244e33ed170daddc9ed9c6ab4";
 let cityName = document.querySelector("#user-input");
 
-let searchDiv = document.querySelector("#search");
+let btnsDiv = document.querySelector("#btns");
 let searchBtn = document.querySelector("#search-btn");
 let cityDiv = document.querySelector("#city-weather");
 let forecastDiv = document.querySelector("#forecast");
 let historyDiv = document.querySelector("#past-searches");
 
-let history = JSON.parse(localStorage.getItem("cities")) || [];
+let pastSearches = [];
 
 // functions
-function init() {}
+function init() {
+  console.log("pastSearches at init", pastSearches);
+  displayHistory();
+}
 
-function getWeather(event) {
-  let city = cityName.value;
-  let forecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}`;
+function displayHistory() {
+  // show past searches
+  let history = JSON.parse(localStorage.getItem("cities")) || [];
+  console.log("history in display history", history);
+  if (history.length > 0) {
+    history.forEach((search) => {
+      let historyBtn = document.createElement("button");
+      historyBtn.innerHTML = search;
+      historyBtn.classList.add("historyBtn");
+      btnsDiv.append(historyBtn);
+    });
+  } else {
+    return;
+  }
+}
+
+function getWeather(city) {
+  // Reset
   cityDiv.innerHTML = "";
   forecastDiv.innerHTML = "";
-  event.preventDefault();
+
+  // add function that checks if the city exists
+
+  pastSearches.push(city);
+  console.log("pastSearches at getWeather", pastSearches);
+  localStorage.setItem("cities", JSON.stringify(pastSearches));
+  let forecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
   fetch(forecastURL)
     .then(function (response) {
       return response.json();
@@ -48,9 +72,16 @@ function getWeather(event) {
     });
 }
 
-function displayHistory() {
-  // show past searches
-}
-
-// event listeners
-searchBtn.addEventListener("click", getWeather);
+// event listener
+init();
+btnsDiv.addEventListener("click", function (e) {
+  if (e.target.classList.contains("historyBtn")) {
+    let cityChoice = e.target.innerHTML;
+    console.log("hopefully prev buton", cityChoice);
+    getWeather(cityChoice);
+  } else {
+    let cityChoice = cityName.value;
+    console.log("hopefully user input", cityChoice);
+    getWeather(cityChoice);
+  }
+});
