@@ -7,12 +7,14 @@ let searchBtn = document.querySelector("#search-btn");
 let cityDiv = document.querySelector("#city-weather");
 let forecastDiv = document.querySelector("#forecast");
 let historyDiv = document.querySelector("#past-searches");
+let displayWeather = document.querySelector("#display-weather");
 
 let pastSearches = JSON.parse(localStorage.getItem("cities")) || [];
 
 // functions
 
 function init() {
+  displayWeather.classList.add("hide");
   displayHistory();
 }
 
@@ -75,6 +77,7 @@ function getWeather(city) {
         }
       });
     });
+  // Show
 }
 
 function handlePastSearches(city) {
@@ -94,11 +97,13 @@ btnsDiv.addEventListener("click", function (e) {
   if (e.target.classList.contains("historyBtn")) {
     let cityChoice = e.target.innerHTML;
     getWeather(cityChoice);
+    displayWeather.classList.remove("hide");
     displayHistory();
   } else if (e.target.classList.contains("searchBtn")) {
     let cityChoice = cityName.value;
     if (cityChoice != "") {
       getWeather(cityChoice);
+      displayWeather.classList.remove("hide");
       displayHistory();
     }
   } else {

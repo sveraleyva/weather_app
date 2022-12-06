@@ -86,3 +86,14 @@ h4 {
     padding-bottom: 0.5rem;
     color: whitesmoke;
 }
+
+.historyBtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hide {
+    visibility: hidden;
+}
