@@ -6,7 +6,7 @@ This is a one page application where the user can search a city and get the day'
 
 ## Screenshot:
 
-![Screen Shot 2022-11-20 at 10 05 30 PM](https://user-images.githubusercontent.com/115383177/202963352-67b4e152-1182-4060-a932-1f8609240901.png)
+![Screen Shot 2022-12-05 at 9 27 54 PM](https://user-images.githubusercontent.com/115383177/205807169-36e9013d-aa8f-4893-9b8e-84c22c4ffed8.png)
 
 ## Experience:
 
@@ -14,7 +14,7 @@ Local storage gave me an absolute headache and styling was the least of my worri
 
 ## Usage
 
-Link to the deployed site: https://sveraleyva.github.io/codeQuiz/
+Link to the deployed site: https://sveraleyva.github.io/weather_app/
 
 ## Credits
 
